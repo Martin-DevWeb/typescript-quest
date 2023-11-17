@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/index.ts"
+    "level1": "nodemon ./src/level1.ts",
+    "level2": "nodemon ./src/level2.ts",
+    "level3": "nodemon ./src/level3.ts"
   },
   "keywords": [],
   "author": "",
