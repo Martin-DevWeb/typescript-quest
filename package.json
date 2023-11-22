@@ -7,13 +7,16 @@
     "level1": "nodemon ./src/level1.ts",
     "level2": "nodemon ./src/level2.ts",
     "level3": "nodemon ./src/level3.ts",
-    "boss": "nodemon ./src/boss.ts"
+    "boss": "nodemon ./src/boss.ts",
+    "dev": "vite"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^2.0.20"
+    "bootstrap": "^5.3.2",
+    "nodemon": "^2.0.20",
+    "vite": "^5.0.2"
   },
   "devDependencies": {
     "ts-node": "^10.9.1"

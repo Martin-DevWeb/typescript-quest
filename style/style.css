@@ -1,0 +1,100 @@
+section#selection .col img {
+  --s: 8rem;
+
+  max-height: 8rem;
+  aspect-ratio: 1;
+  outline: calc(var(--s) / 2) solid #0009;
+  outline-offset: calc(var(--s) / -2);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+div#charac a:hover > img {
+  outline: 8px solid green;
+  outline-offset: 14px;
+}
+
+div#opp a:hover > img {
+  outline: 8px solid red;
+  outline-offset: 14px;
+}
+
+.col a:hover div.position-absolute {
+  color: black !important;
+  font-weight: 900;
+  top: 105% !important;
+  transition: 0.3s;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+#battle {
+  background-image: url("../img/cave_arena.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+div#charac .active-img {
+  outline: 8px solid green;
+  outline-offset: 14px;
+}
+
+div#opp .active-img {
+  outline: 8px solid red;
+  outline-offset: 14px;
+}
+
+.active-text {
+  color: black !important;
+  font-weight: 900;
+  top: 105% !important;
+  transition: 0.3s;
+}
+
+.hit {
+  animation: hit 0.5s 2;
+  animation-direction: alternate;
+  position: relative;
+}
+
+@keyframes hit {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 30%;
+  }
+}
+
+.hitBack {
+  animation: hitBack 0.5s 2;
+  animation-direction: alternate;
+  position: relative;
+}
+
+@keyframes hitBack {
+  0% {
+    right: 0%;
+  }
+  100% {
+    right: 30%;
+  }
+}
+
+.dying {
+  animation: dead 1s;
+}
+
+@keyframes dead {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
