@@ -28,7 +28,7 @@
 
 - Classes are the fundamental entities used to create reusable components. Typescript classes adds types and visibility modifiers to Javascript classes, like object-oriented programming language JAVA. A class can include : a constructor, properties and methods.
 
-- Constructors essentially allow the creation of objects from classes. You can only include one constructor in a class.
+- Constructors are the method that allow the creation of objects from classes. You can only include one constructor in a class.
 
 - The class is like the blueprint for creating the object, while instances are the objects themselves (created from the blueprint). If we want to link it with the constructor, the constructor is a method that runs every time a new instance of the class is created.
 
@@ -43,3 +43,19 @@
   - `public` : can be accessed from everywhere
   - `protected` : can be accessed only in their class or their subclasses
   - `private` : similar to protected, but prevents subclasses from accessing
+
+## Level 3
+
+- When we want everything to be properly organized and clean, we can use the `import` and `export` modules. Every file containing `import` or `export` is a module. We can use `export` with a class, a function or an interface.
+
+- `export` is a keyword to make a module avalaible in another location.
+
+- `import` is a keyword to reuse the component exported inside the module.
+
+- We must use the `extends` keyword to allow a class to inherit from another class.
+
+- We can use `super()` in the constructor of the child class to call the constructor of the parent class.
+
+- If we want to use a method from the parent class in the child class we use `super.methodInParentClass()`.
+
+- Polymorphism is when we have multiple classes that have the same method, but a different implementation of that same method. Polymorphism use inheritance to use the same method with a different implementation.

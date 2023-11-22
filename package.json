@@ -6,7 +6,8 @@
   "scripts": {
     "level1": "nodemon ./src/level1.ts",
     "level2": "nodemon ./src/level2.ts",
-    "level3": "nodemon ./src/level3.ts"
+    "level3": "nodemon ./src/level3.ts",
+    "boss": "nodemon ./src/boss.ts"
   },
   "keywords": [],
   "author": "",
