@@ -56,6 +56,6 @@
 
 - We can use `super()` in the constructor of the child class to call the constructor of the parent class.
 
-- If we want to use a method from the parent class in the child class we use `super.methodInParentClass()`.
+- If we want to use a method from the parent class in the child class we use `super.methodInParentClass()`. Next, you call the super method with the name of the new object and the method freshly created.
 
 - Polymorphism is when we have multiple classes that have the same method, but a different implementation of that same method. Polymorphism use inheritance to use the same method with a different implementation.
