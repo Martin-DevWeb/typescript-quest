@@ -98,3 +98,15 @@ div#opp .active-img {
     opacity: 0;
   }
 }
+
+section#battle img {
+  max-height: 20rem;
+}
+
+#characterPv {
+  right: 40%;
+}
+
+#opponentPv {
+  left: 40%;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- script -->
-    <script src="./src/battle.ts"></script>
+    <script src="./src/baston.ts"></script>
     <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -229,10 +229,31 @@
     </section>
     <section
       id="battle"
-      class="d-none row text-center align-items-center justify-content-between"
+      class="d-none row text-center align-items-center justify-content-between position-relative"
     >
-      <div class="col" id="character"></div>
-      <div class="col" id="opponent"></div>
+      <div class="col position-relative" id="character"></div>
+      <div
+        id="characterPv"
+        class="position-absolute top-50 translate-middle-y fs-1 text-danger"
+      ></div>
+      <div class="col position-relative" id="opponent"></div>
+      <div
+        id="opponentPv"
+        class="position-absolute top-50 translate-middle-y fs-1 text-danger"
+      ></div>
+      <div
+        id="draw"
+        class="d-none fs-1 fw-bold text-danger badge bg-danger-subtle position-absolute top-50 start-50 translate-middle w-75"
+      >
+        It's a draw !
+      </div>
+      <button
+        id="reload"
+        class="btn btn-danger position-absolute bottom-0 start-50 translate-middle-x w-25"
+        onclick="Reload()"
+      >
+        - New battle -
+      </button>
     </section>
   </body>
 </html>

@@ -2,7 +2,7 @@ export class Hero {
   private name: string;
   private power: number;
   private life: number;
-  weapon: Weapon = new Weapon("Fists", 1);
+  weapon!: Weapon;
 
   constructor(name: string, power: number, life: number) {
     this.name = name;
