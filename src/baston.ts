@@ -147,12 +147,16 @@ function Opponent(opp: string) {
 function Battle() {
   let j1 = document.getElementById("character")!;
   let j2 = document.getElementById("opponent")!;
-  j1.innerHTML = `<img src="./img/${character}.webp" alt="${character}" id="${character}"
+  j1.innerHTML = `<progress id="${character}Life" class="position-absolute translate-middle-y"></progress>
+  <img src="./img/${character}.webp" alt="${character}" id="${character}"
     /><p id="${
       character + "Win"
     }" class="d-none fs-1 fw-bold text-success badge bg-success-subtle position-absolute top-0 start-50 translate-middle">WINNER !</p>
+    <img src="./img/fireball.png" alt="fireball" id="fireballLeft" class="d-none"/>
     `;
-  j2.innerHTML = `<img src="./img/${opponent}.webp" alt="${opponent}" id="${opponent}"
+  j2.innerHTML = `<progress id="${opponent}Life" class="position-absolute translate-middle-y"></progress>
+  <img src="./img/fireball.png" alt="fireball" id="fireballRight" class="d-none"/>
+  <img src="./img/${opponent}.webp" alt="${opponent}" id="${opponent}"
     /><p id="${
       opponent + "Win"
     }" class="d-none fs-1 fw-bold text-success badge bg-success-subtle position-absolute top-0 start-50 translate-middle">WINNER !</p>
@@ -251,36 +255,82 @@ async function Baston(j1: Hero, j2: Hero) {
   let player2Win = document.getElementById(`${opponent}Win`);
   let characPv = document.getElementById("characterPv");
   let oppPv = document.getElementById("opponentPv");
+  let fireballLeft = document.getElementById("fireballLeft");
+  let fireballRight = document.getElementById("fireballRight");
+  let characterLife = document.getElementById(`${character}Life`);
+  let opponentLife = document.getElementById(`${opponent}Life`);
+
   characPv!.innerHTML = `${j1.pvLeft()} pv`;
   oppPv!.innerHTML = `${j2.pvLeft()} pv`;
+  characterLife?.setAttribute("max", `${j1.pvLeft()}`);
+  characterLife?.setAttribute("value", `${j1.pvLeft()}`);
+  opponentLife?.setAttribute("max", `${j2.pvLeft()}`);
+  opponentLife?.setAttribute("value", `${j2.pvLeft()}`);
+
   while (j1.isAlive() && j2.isAlive()) {
     console.log(`turn:${turn}`);
-    player1Img?.classList.add("hit");
-    player2Img?.classList.add("hitBack");
-    await sleep(1000);
-    player1Img?.classList.remove("hit");
-    player2Img?.classList.remove("hitBack");
-    await sleep(1000);
     if (j1.weapon.name == "Dagger") {
       j1.attack(j2);
+      player1Img?.classList.add("hit");
+      await sleep(1000);
+      player1Img?.classList.remove("hit");
+      await sleep(100);
     }
     if (j2.weapon.name == "Dagger") {
       j2.attack(j1);
+      player2Img?.classList.add("hitBack");
+      await sleep(1000);
+      player2Img?.classList.remove("hitBack");
+      await sleep(100);
     }
-    if (j1.weapon.name != "Staff") {
+    if (j1.weapon.name != "Staff" && j2.weapon.name != "Staff") {
       j1.attack(j2);
-    }
-    if (j2.weapon.name != "Staff") {
       j2.attack(j1);
+      player1Img?.classList.add("hit");
+      player2Img?.classList.add("hitBack");
+      await sleep(1000);
+      player1Img?.classList.remove("hit");
+      player2Img?.classList.remove("hitBack");
     }
-    if (j1.weapon.name == "Staff" && turn % 2 != 0) {
-      j1.attack(j2);
+    if (j1.weapon.name == "Staff") {
+      if (turn % 2 != 0) {
+        j1.attack(j2);
+        fireballLeft?.classList.remove("d-none");
+        fireballLeft?.classList.add("fireballLeft");
+        await sleep(700);
+        fireballLeft?.classList.add("d-none");
+        fireballLeft?.classList.remove("fireballLeft");
+        await sleep(100);
+      }
+      if (j2.weapon.name != "Staff") {
+        j2.attack(j1);
+        player2Img?.classList.add("hitBack");
+        await sleep(1000);
+        player2Img?.classList.remove("hitBack");
+      }
     }
-    if (j2.weapon.name == "Staff" && turn % 2 != 0) {
-      j2.attack(j1);
+    if (j2.weapon.name == "Staff") {
+      if (turn % 2 != 0) {
+        j2.attack(j1);
+        fireballRight?.classList.remove("d-none");
+        fireballRight?.classList.add("fireballRight");
+        await sleep(700);
+        fireballRight?.classList.add("d-none");
+        fireballRight?.classList.remove("fireballRight");
+        await sleep(100);
+      }
+      if (j1.weapon.name != "Staff") {
+        j1.attack(j2);
+        player1Img?.classList.add("hit");
+        await sleep(1000);
+        player1Img?.classList.remove("hit");
+      }
     }
     characPv!.innerHTML = `${j1.pvLeft()} pv`;
     oppPv!.innerHTML = `${j2.pvLeft()} pv`;
+    characterLife?.setAttribute("value", `${j1.pvLeft()}`);
+    opponentLife?.setAttribute("value", `${j2.pvLeft()}`);
+    await sleep(500);
     console.log(`${j1.getName()} : ${j1.pvLeft()}pv`);
     console.log(`${j2.getName()} : ${j2.pvLeft()}pv`);
     turn++;
@@ -291,6 +341,8 @@ async function Baston(j1: Hero, j2: Hero) {
     player2Img?.classList.add("dying");
     player2Img?.addEventListener("animationend", () => {
       player2Img?.classList.add("d-none");
+      opponentLife?.classList.add("d-none");
+      oppPv!.innerHTML = "";
     });
   } else if (j2.isAlive()) {
     console.log(`${j2.getName()} wins !`);
@@ -298,16 +350,22 @@ async function Baston(j1: Hero, j2: Hero) {
     player1Img?.classList.add("dying");
     player1Img?.addEventListener("animationend", () => {
       player1Img?.classList.add("d-none");
+      characterLife?.classList.add("d-none");
+      characPv!.innerHTML = "";
     });
   } else {
     console.log("It's a draw !");
     player1Img?.classList.add("dying");
     player1Img?.addEventListener("animationend", () => {
       player1Img?.classList.add("d-none");
+      characterLife?.classList.add("d-none");
+      characPv!.innerHTML;
     });
     player2Img?.classList.add("dying");
     player2Img?.addEventListener("animationend", () => {
       player2Img?.classList.add("d-none");
+      opponentLife?.classList.add("d-none");
+      oppPv!.innerHTML = "";
     });
     let draw = document.getElementById("draw");
     draw?.classList.remove("d-none");

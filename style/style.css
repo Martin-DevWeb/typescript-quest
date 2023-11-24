@@ -105,8 +105,61 @@ section#battle img {
 
 #characterPv {
   right: 40%;
+  top: 70%;
+}
+
+#character progress {
+  top: 110%;
+  left: 35%;
+  accent-color: red;
+}
+
+#opponent progress {
+  top: 110%;
+  right: 35%;
+  accent-color: red;
 }
 
 #opponentPv {
   left: 40%;
+  top: 70%;
+}
+
+#fireballLeft {
+  width: 7rem;
+}
+
+#fireballRight {
+  width: 7rem;
+  transform: scale(-1);
+}
+
+.fireballLeft {
+  animation: fireballLeft 0.7s 1;
+  animation-direction: normal;
+  position: relative;
+}
+
+.fireballRight {
+  animation: fireballRight 0.7s 1;
+  animation-direction: normal;
+  position: relative;
+}
+
+@keyframes fireballLeft {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 75%;
+  }
+}
+
+@keyframes fireballRight {
+  0% {
+    right: 0%;
+  }
+  100% {
+    right: 75%;
+  }
 }
